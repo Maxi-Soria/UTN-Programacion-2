@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1681933353 source:c:\users\erica\desktop\programacion 2\guias\tp 1\6. tp 2 clases\proyecto clase articulo\clase articulo\main.cpp
+	<iostream>
+	"Articulo.h"
+
+1681933399 c:\users\erica\desktop\programacion 2\guias\tp 1\6. tp 2 clases\proyecto clase articulo\clase articulo\include\articulo.h
+
+1681933237 source:c:\users\erica\desktop\programacion 2\guias\tp 1\6. tp 2 clases\proyecto clase articulo\clase articulo\src\articulo.cpp
+	<iostream>
+	<cstdlib>
+	<cstring>
+	"Articulo.h"
+

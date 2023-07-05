@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1682015863 source:c:\users\erica\desktop\programacion 2\guias\tp 1\7. tp 3\proyecto clase mision\proyecto mision\src\fecha.cpp
+	<iostream>
+	<cstdlib>
+	"Fecha.h"
+
+1682013628 c:\users\erica\desktop\programacion 2\guias\tp 1\7. tp 3\proyecto clase mision\proyecto mision\include\fecha.h
+
+1682470781 source:c:\users\erica\desktop\programacion 2\guias\tp 1\7. tp 3\proyecto clase mision\proyecto mision\main.cpp
+	<iostream>
+	"Mision.h"
+
+1682470587 c:\users\erica\desktop\programacion 2\guias\tp 1\7. tp 3\proyecto clase mision\proyecto mision\include\mision.h
+	"Fecha.h"
+	<cstring>
+
+1682470587 source:c:\users\erica\desktop\programacion 2\guias\tp 1\7. tp 3\proyecto clase mision\proyecto mision\src\mision.cpp
+	<iostream>
+	<cstring>
+	"Mision.h"
+
