@@ -1,7 +1,3 @@
-///Ejercicio: Parcial 2 de Programación II
-///Autor:DEK
-///Fecha:13/06/2022
-///Comentario:
 
 void cargarCadena(char *pal, int tam){
     int i;
@@ -78,6 +74,14 @@ public:
     void setNombre(const char* n) { strcpy(nombre, n); }
     void setDireccion(const char* d) { strcpy(direccion, d); }
     void setTipoEmpresa(int t) { tipoEmpresa = t; }
+
+    ///Sobre carga de operador == del punto E
+    bool operator == (Cosecha reg){
+        if(strcmp(codigoEmpresa,reg.getCodigoEmpresa())== 0){
+            return true;
+        }
+        return false
+    }
 };
 
 class ArchivoEmpresa {
@@ -110,32 +114,7 @@ public:
         fclose(p);
         return tam / sizeof(Empresa);
     }
-    ///********************************************************
-    bool listarArchivo(){
-        Empresa reg;
-        FILE *p;
-        p = fopen(nombre, "rb");
-        if (p == NULL){
-        cout << "No se pudo abrir " << endl;
-        return false;
-        }
-        while (fread(&reg, sizeof reg, 1, p)==1 ){
-        reg.Mostrar();
-        cout << endl;
-        }
-        fclose(p);
-        return true;
-        }
 
-    bool escribirRegistro(Empresa reg){
-        FILE *p;
-        p=fopen(nombre, "ab");
-        if(p==NULL) return false;
-        bool escribio = fwrite(&reg, sizeof reg, 1, p);
-        fclose(p);
-        return escribio;
-    }
-    ///*********************************************************
 };
 
 class Cosecha {
@@ -212,23 +191,6 @@ public:
         return tam / sizeof(Cosecha);
     }
 
-    ///********************************************************
-    bool listarArchivo(){
-        Cosecha reg;
-        FILE *p;
-        p = fopen(nombre, "rb");
-        if (p == NULL){
-        cout << "No se pudo abrir " << endl;
-        return false;
-        }
-        while (fread(&reg, sizeof reg, 1, p)==1 ){
-        reg.Mostrar();
-        cout << endl;
-        }
-        fclose(p);
-        return true;
-        }
-
     bool escribirRegistro(Cosecha reg){
         FILE *p;
         p=fopen(nombre, "ab");
@@ -237,18 +199,7 @@ public:
         fclose(p);
         return escribio;
     }
-    ///*********************************************************
-    ///GUARDAR---------------------------------------------------
-    bool remplazarReg(Cosecha reg, int pos){
-        FILE *p = fopen(nombre, "rb+");
 
-        if (p == NULL){return false;}
-
-        fseek(p, pos * sizeof(Cosecha), SEEK_SET);
-        bool pudoEscribir = fwrite(&reg, sizeof(Cosecha), 1, p);
-        fclose(p);
-        return pudoEscribir;
-    }
 };
 
 

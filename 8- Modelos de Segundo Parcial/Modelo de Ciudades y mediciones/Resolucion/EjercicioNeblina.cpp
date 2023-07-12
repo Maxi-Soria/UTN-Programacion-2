@@ -13,16 +13,6 @@ private:
     bool estado;
 
 public:
-    void Cargar() {
-        cout << "Ingrese el código de la ciudad: ";
-        cin >> codigoCiudad;
-        cout << "Ingrese el nombre: ";
-        cargarCadena(nombre, 29);
-        cout << "Ingrese el promedio de visibilidad: ";
-        cin >> promedioVisibilidad;
-        estado = true;
-    }
-
     void Mostrar() {
         cout << "Codigo de la ciudad: " << codigoCiudad << endl;
         cout << "Nombre: " << nombre << endl;
@@ -30,10 +20,6 @@ public:
         cout << "Estado: " << (estado ? "Activo" : "Inactivo") << endl;
     }
 
-    int getCodigoCiudad() { return codigoCiudad; }
-    const char* getNombre() { return nombre; }
-    float getPromedioVisibilidad() { return promedioVisibilidad; }
-    bool getEstado() { return estado; }
 
     void setCodigoCiudad(int codigo) { codigoCiudad = codigo; }
     void setNombre(const char* n) { strcpy(nombre, n); }
@@ -46,8 +32,8 @@ private:
     char nombre[30];
 
 public:
-    ArchivoPuntoA(const char* n) {
-        strcpy(nombre, n);
+    ArchivoPuntoA() {
+        strcpy(nombre, "PuntoA");
     }
 
 
@@ -66,6 +52,20 @@ public:
         fclose(p);
     }
 
+    bool listarArchivo() {
+        PuntoA reg;
+        FILE* p = NULL;
+        p = fopen(nombre, "rb");
+        if (p == NULL) {return false;}
+        while (fread(&reg, sizeof reg, 1, p) == 1) {
+            reg.Mostrar();
+            cout << endl;
+        }
+        fclose(p);
+        return true;
+    }
+
+
 };
 
 
@@ -74,7 +74,7 @@ void solucionPuntoA();
 void solucionPuntoB();
 
 int main(){
-    //solucionPuntoA();
+    solucionPuntoA();
     solucionPuntoB();
 
 
@@ -90,29 +90,32 @@ void solucionPuntoA(){
     Mediciones regMed;
     int cantMed = archMed.contarRegistros();
 
-    ArchivoPuntoA archPA("puntoA.dat");
+    ArchivoPuntoA archPA;
     PuntoA regPA;
     archPA.vaciar();
 
 
     for (int i=0 ; i<cantCiud ; i++ ){
         regCiud = archCiud.leerRegistro(i);
-        int cont = 0;
+        int cont = 1;
         float acum = 0;
+        bool guardar = false;
         for (int j=0 ; j<cantMed; j++ ){
             regMed = archMed.leerRegistro(j);
             if(regCiud.getCodigoCiudad() == regMed.getCodigoCiudad()){
                 acum += regMed.getVisibilidad();
                 cont++;
+                guardar = true;
             }
         }
-        regPA.setCodigoCiudad(regCiud.getCodigoCiudad());
-        regPA.setNombre(regCiud.getNombre());
-        regPA.setPromedioVisibilidad(acum/cont);
-        regPA.Mostrar();
-        archPA.escribirRegistro(regPA);
+        if(guardar){
+            regPA.setCodigoCiudad(regCiud.getCodigoCiudad());
+            regPA.setNombre(regCiud.getNombre());
+            regPA.setPromedioVisibilidad(acum/cont);
+            archPA.escribirRegistro(regPA);
+        }
     }
-
+    archPA.listarArchivo();
 }
 
 void solucionPuntoB(){
@@ -128,7 +131,6 @@ void solucionPuntoB(){
             mat[regMed.getVisibilidad()][regMed.getFecha().getMes()-1]++;
         }
     }
-    system("pause");
     for (int i=0 ; i<6 ; i++ ){
         cout << "Grado "<<i+1 << endl;
         for (int j=0 ; j<31 ; j++ ){
