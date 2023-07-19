@@ -132,6 +132,7 @@ void solucionPuntoA(){
                 acumToneladas += regCos.getToneladasCosechadas();
             }
         }
+
         regPA.setCodigoEmpresa(regEmp.getCodigoEmpresa());
         regPA.setNombre(regEmp.getNombre());
         regPA.setCantToneladas(acumToneladas);
@@ -181,14 +182,16 @@ void solucionPuntoC(){
 
     PuntoA* vec = nullptr;
     vec = new PuntoA[cantEmp];
-    if(vec == nullptr){return;}
+    if(vec == nullptr){return ;}
 
     ArchivoPuntoA archPA;
     archPA.vaciar();
 
     for (int i=0 ; i<cantEmp ; i++ ){
         regEmp = archEmp.leerRegistro(i);
+
         float acumToneladas = 0;
+
         for (int j=0 ; j<cantCos ; j++ ){
             regCos = archCos.leerRegistro(j);
             if(strcmp(regEmp.getCodigoEmpresa(),regCos.getCodigoEmpresa()) == 0){
@@ -200,6 +203,7 @@ void solucionPuntoC(){
         vec[i].setCantToneladas(acumToneladas);
         archPA.escribirRegistro(vec[i]);
     }
+    delete []vec;
 
     archPA.listarArchivo();
 

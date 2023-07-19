@@ -72,10 +72,47 @@ public:
 
 void solucionPuntoA();
 void solucionPuntoB();
+void solucionPuntoC(){
+    int codCuidad;
+    cout<<"Ingrese el codigo a buscar: ";
+    cin>>codCuidad;
+
+    ArchivoCiudades archCiud;
+    Ciudades regCiud;
+    int cantCiudades = archCiud.contarRegistros();
+
+    int cont = 0;
+    for (int i=0 ; i<cantCiudades ; i++ ){
+        regCiud = archCiud.leerRegistro(i);
+        if(regCiud.getCodigoCiudad() == codCuidad){
+            cont++;
+        }
+    }
+
+    Ciudades* vec = nullptr;
+    vec = new Ciudades[cont];
+    if(vec == nullptr){return;}
+
+    int pos = 0;
+    for (int i=0 ; i<cantCiudades ; i++ ){
+        regCiud = archCiud.leerRegistro(i);
+        if(regCiud.getCodigoCiudad() == codCuidad){
+            vec[pos]=regCiud;
+        }
+    }
+    for (int i=0 ; i<cont ; i++ ){
+        vec[i].Mostrar();
+    }
+}
 
 int main(){
-    solucionPuntoA();
-    solucionPuntoB();
+    //solucionPuntoA();
+    //solucionPuntoB();
+    solucionPuntoC();
+
+    //ArchivoCiudades arch;
+    //arch.listarArchivo();
+
 
 
 return 0;

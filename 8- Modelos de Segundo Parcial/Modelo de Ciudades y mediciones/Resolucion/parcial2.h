@@ -69,6 +69,11 @@ public:
         setCodigoProvincia(codigoProvincia);
 
     }
+    void Mostrar(){
+        cout<<"CODIGO DE LA CIUDAD: "<<_CodigoCiudad<<endl;
+        cout<<"NOMBRE: "<<_Nombre<<endl;
+        cout<<"CODIGO DE LA PROVINCIA: "<<_CodigoProvincia<<endl;;
+    }
 
     void setCodigoCiudad(int ciudad){_CodigoCiudad = ciudad;}
     void setNombre(const char* nombre){strcpy(_Nombre,nombre);}
@@ -88,37 +93,49 @@ public:
     ArchivoCiudades(){strcpy(nombre,"ciudades.dat");}
 
     int contarRegistros(){
-    FILE* p;
-    int tam;
-
-    p = fopen ("ciudades.dat","rb");
-    if(p == NULL){
-        return -1;
-    }
-    fseek(p,0,SEEK_END);
-    tam = ftell(p);
-    fclose(p);
-
-    return tam/sizeof(Ciudades);
+        FILE* p;
+        int tam;
+        p = fopen ("ciudades.dat","rb");
+        if(p == NULL){return -1;}
+        fseek(p,0,SEEK_END);
+        tam = ftell(p);
+        fclose(p);
+        return tam/sizeof(Ciudades);
     }
 
     Ciudades leerRegistro(int pos){
-    FILE* p;
-    Ciudades regCiudades;
+        FILE* p;
+        Ciudades regCiudades;
 
-    p = fopen(nombre,"rb");
+        p = fopen(nombre,"rb");
 
-    if(p == NULL){
-        cout<<"Error en la apertura del archivo"<<endl;
+        if(p == NULL){
+            cout<<"Error en la apertura del archivo"<<endl;
+            return regCiudades;
+        }
+
+        fseek(p,sizeof(Ciudades) * pos ,SEEK_SET);
+        fread(&regCiudades,sizeof(Ciudades),1,p);
+        fclose(p);
         return regCiudades;
-    }
-
-    fseek(p,sizeof(Ciudades) * pos ,SEEK_SET);
-    fread(&regCiudades,sizeof(Ciudades),1,p);
-    fclose(p);
-    return regCiudades;
 
     }
+    bool listarArchivo() {
+        Ciudades reg;
+        FILE* p;
+        p = fopen(nombre, "rb");
+        if (p == NULL) {
+            cout << "No se pudo abrir el archivo." << endl;
+            return false;
+        }
+        while (fread(&reg, sizeof reg, 1, p) == 1) {
+            reg.Mostrar();
+            cout << endl;
+        }
+        fclose(p);
+        return true;
+    }
+
 };
 
 

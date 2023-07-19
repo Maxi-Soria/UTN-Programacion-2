@@ -218,8 +218,8 @@ void solucionPunto2();
 void solucionPunto3();
 void solucionPunto5();
 void solucionPunto6();
-
-
+void solucionPunto7();
+void solucionPunto10();
 
 int main(){
     setlocale (LC_ALL, "Spanish");
@@ -237,6 +237,8 @@ int main(){
     solucionPunto5();
     cout << endl << "PUNTO 6" << endl;
     solucionPunto6();
+    solucionPunto7();
+    solucionPunto10();
 
 
 
@@ -316,6 +318,7 @@ void solucionPunto3(){
         }
     }
 
+
     Avion* vec = nullptr;
     vec = new Avion[cant];
     if(vec == nullptr)return;
@@ -323,6 +326,7 @@ void solucionPunto3(){
     int pos = 0;
     for (int i=0 ; i<cantRegAviones ; i++ ){
         regAviones = archAviones.leerRegistro(i);
+
         if(regAviones.getTipo() == 1){
             vec[pos].setCodigoAvion(regAviones.getCodigoAvion());
             vec[pos].setNombre(regAviones.getNombre());
@@ -383,6 +387,9 @@ void solucionPunto6(){
     Pasaje regPasaje;
     int cantPasajes = archPasaje.contarRegistros();
 
+    ArchivoPunto6 archP6;
+    Punto6 regP6;
+
     for (int i=0 ; i<cantAviones ; i++ ){
         regAvion = archAvion.leerRegistro(i);
 
@@ -401,8 +408,64 @@ void solucionPunto6(){
             }
 
         }
-        cout << regAvion.getCodigoAvion() << "      " << regAvion.getNombre() << "      "<<contador<<endl;
-
+        regP6.setCodigoAvion(regAvion.getCodigoAvion());
+        regP6.setNombre(regAvion.getNombre());
+        regP6.setCantidadVuelos(contador);
+        archP6.escribirRegistro(regP6);
     }
 }
 
+
+void solucionPunto7(){
+    ArchivoPunto6 archP6;
+    Punto6 regP6;
+
+    int cant = archP6.contarRegistros();
+
+    Punto6* vec = nullptr;
+    vec = new Punto6[cant];
+    if(vec==nullptr){return;}
+
+    for (int i=0 ; i<cant ; i++ ){
+        regP6 = archP6.leerRegistro(i);
+        vec[i]=regP6;
+    }
+
+    for (int i=0 ; i<cant ; i++ ){
+        vec[i].Mostrar();
+    }
+
+}
+
+void solucionPunto10(){
+    ArchivoAvion archAvion;
+    Avion regAvion;
+    int cant = archAvion.contarRegistros();
+
+    int cont = 0;
+
+    for (int i=0 ; i<cant ; i++ ){
+        regAvion = archAvion.leerRegistro(i);
+        if(regAvion.getTipo() == 5){
+            cont++;
+        }
+    }
+
+    Avion* vec = nullptr;
+    vec = new Avion[cont];
+    if(vec == nullptr){return;}
+
+
+    int pos = 0;
+    for (int i=0 ; i<cant ; i++ ){
+        regAvion = archAvion.leerRegistro(i);
+        if(regAvion.getTipo() == 5){
+            vec[pos] = regAvion;
+            pos++;
+        }
+    }
+
+    for (int i=0 ; i<cont ; i++ ){
+        vec[i].Mostrar();
+    }
+}
