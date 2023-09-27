@@ -26,9 +26,7 @@ public:
         cin>>anio;
     }
     void Mostrar(){
-        cout<<dia<<"/";
-        cout<<mes<<"/";
-        cout<<anio<<endl;
+        cout<<dia<<"/"<<mes<<"/"<<anio;
     }
     int getDia(){return dia;}
     int getMes(){return mes;}
@@ -59,12 +57,9 @@ public:
     }
 
     void Mostrar(){
-        cout<<codigoObra<<endl;
-        cout<<direccion<<endl;
-        cout<<provincia<<endl;
-        cout<<superficie<<endl;
-        cout<<estadoEjecucion<<endl;
-        if(!activo) cout<<"ESTA BORRADO"<<endl<<endl;
+
+        cout<<left<<setw(6)<<codigoObra<<setw(20)<<direccion<<setw(6)<<provincia<<setw(6)<<superficie<<setw(6)<<estadoEjecucion<<setw(6)<<activo<<endl;
+
     }
 
     const char* getCodigoObra(){return codigoObra;}
@@ -111,6 +106,21 @@ public:
         return tam/sizeof(Obra);
     }
 
+    bool listarArchivo(){
+        Obra reg;
+        FILE *p;
+        p = fopen(nombre, "rb");
+        if (p == NULL){
+        cout << "No se pudo abrir " << endl;
+        return false;
+        }
+        while (fread(&reg, sizeof reg, 1, p)==1 ){
+        reg.Mostrar();
+        }
+        fclose(p);
+        return true;
+    }
+
 };
 
 
@@ -134,12 +144,7 @@ public:
         activo=true;
     }
     void Mostrar(){
-        cout<<codigoMaterial<<endl;
-        cout<<nombre<<endl;
-        cout<<marca<<endl;
-        cout<<tipo<<endl;
-        cout<<pu<<endl;
-        if(!activo) cout<<"ESTA BORRADO"<<endl<<endl;
+        cout<<left<<setw(6)<<codigoMaterial<<setw(18)<<nombre<<setw(10)<<marca<<setw(6)<<tipo<<setw(6)<<pu<<setw(6)<<activo<<endl;
     }
     int getCodigoMaterial(){return codigoMaterial;}
     int getTipo(){return tipo;}
@@ -184,6 +189,20 @@ public:
         fclose(p);
         return tam/sizeof(Material);
     }
+    bool listarArchivo(){
+        Material reg;
+        FILE *p;
+        p = fopen(nombre, "rb");
+        if (p == NULL){
+        cout << "No se pudo abrir " << endl;
+        return false;
+        }
+        while (fread(&reg, sizeof reg, 1, p)==1 ){
+        reg.Mostrar();
+        }
+        fclose(p);
+        return true;
+    }
 };
 
 
@@ -208,15 +227,9 @@ public:
     }
 
     void Mostrar(){
-        cout<<numeroCompra<<endl;
-        cout<<numeroProveedor<<endl;
-        cout<<codigoMaterial<<endl;
-        cout<<codigoObra<<endl;
-        cout<<cantidad<<endl;
-        cout<<importe<<endl;
+        cout<<left<<setw(8)<<numeroCompra<<setw(8)<<numeroProveedor<<setw(8)<<codigoMaterial<<setw(8)<<codigoObra<<setw(8)<<cantidad<<setw(8)<<importe;
         fechaCompra.Mostrar();
-        cout<<endl;
-        if(!activo) cout<<"ESTA BORRADO"<<endl<<endl;
+        cout << "   "<< activo<<endl;
     }
     int getNumeroCompra(){return numeroCompra;}
     int getNumeroproveedor(){return numeroProveedor;}
@@ -266,6 +279,28 @@ public:
         fclose(p);
         return tam/sizeof(Compra);
     }
+    bool listarArchivo(){
+        Compra reg;
+        FILE *p;
+        p = fopen(nombre, "rb");
+        if (p == NULL){
+        cout << "No se pudo abrir " << endl;
+        return false;
+        }
+        while (fread(&reg, sizeof reg, 1, p)==1 ){
+        reg.Mostrar();
+        }
+        fclose(p);
+        return true;
+    }
+    bool escribirRegistro(Compra reg){
+        FILE *p;
+        p=fopen(nombre, "ab");
+        if(p==NULL) return false;
+        bool escribio = fwrite(&reg, sizeof reg, 1, p);
+        fclose(p);
+        return escribio;
+    }
 };
 
 class Proveedor{
@@ -286,12 +321,8 @@ public:
         activo=true;
     }
     void Mostrar(){
-        cout<<numeroProveedor<<endl;
-        cout<<nombre<<endl;
-        cout<<telefono<<endl;
-        cout<<direccion<<endl;
-        cout<<provincia<<endl;
-        if(!activo) cout<<"ESTA BORRADO"<<endl<<endl;
+        cout<<left<<setw(6)<<numeroProveedor<<setw(18)<<nombre<<setw(10)<<telefono<<setw(10)<<direccion<<setw(6)<<provincia<<setw(4)<<activo<<endl;
+
     }
 
     int getNumeroProveedor(){return numeroProveedor;}
@@ -337,4 +368,19 @@ public:
         fclose(p);
         return tam/sizeof(Proveedor);
     }
+    bool listarArchivo(){
+        Proveedor reg;
+        FILE *p;
+        p = fopen(nombre, "rb");
+        if (p == NULL){
+        cout << "No se pudo abrir " << endl;
+        return false;
+        }
+        while (fread(&reg, sizeof reg, 1, p)==1 ){
+        reg.Mostrar();
+        }
+        fclose(p);
+        return true;
+    }
+
 };

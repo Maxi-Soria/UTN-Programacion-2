@@ -231,11 +231,16 @@ int main(){
 
     ///
     Articulo obj[TAM] = {
-    Articulo("A1000", "Primera Carga", 1000, 10, false),
+    /*Articulo("A1000", "Primera Carga", 1000, 10, false),
     Articulo("A2000", "Segunda Carga", 2000, 20, true),
     Articulo("A3000", "Tercera Carga", 3000, 30, false),
-    Articulo("A4000", "Cuarta Carga", 4000, 40, true)
+    Articulo("A4000", "Cuarta Carga", 4000, 40, true)*/
     };
+
+    for (int i=0 ; i<TAM ; i++ ){
+        obj[i].Cargar();
+
+    }
 
     char opcion;
 

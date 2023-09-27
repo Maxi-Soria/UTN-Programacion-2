@@ -291,18 +291,18 @@ int main() {
 }
 void punto1(){
     //char vec[10] = {"aleatorio"};
-    //Punto obj(vec);
+    Punto obj(0,0,3);
 
-    //int x, y;
-    //cout << "Ingrese la cordenada X: ";
-    //cin >> x;
-    //cout << "Ingrese la cordenada y: ";
-    //cin >> y;
-    //obj.setX(x);
-    //obj.setY(y);
+    int x, y;
+    cout << "Ingrese la cordenada X: ";
+    cin >> x;
+    cout << "Ingrese la cordenada y: ";
+    cin >> y;
+    obj.setX(x);
+    obj.setY(y);
     system("cls");
 //    obj.MostrarValores();
-    //obj.Mostrar();
+    obj.Mostrar();
 
     /* Pruebas punto b)2
     sleep(2);
