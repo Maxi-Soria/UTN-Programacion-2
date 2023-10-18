@@ -267,8 +267,40 @@ void SolucionPunto5(){
 }
 
 
+bool remplazar(Compra reg, int posicionAReemplazar){
+    FILE *p = fopen("compras.dat", "rb+");
+    if (p == NULL){return false;}
+    fseek(p, posicionAReemplazar * sizeof(Compra), SEEK_SET);
+    bool pudoEscribir = fwrite(&reg, sizeof(Compra), 1, p);
+    fclose(p);
+    return pudoEscribir;
+}
+
+
+void solucionPunto6(){
+    ArchivoCompra archCp("compras.dat");
+    int cant = archCp.contarRegistros();
+    Compra reg;
+
+    for (int i=0 ; i<cant ; i++ ){
+        reg = archCp.leerRegistro(i);
+        if(reg.getFechaCompra().getAnio() == 2022){
+            reg.setActivo(false);
+            remplazar(reg,i);
+        }
+    }
+
+
+
+
+
+
+}
+
+
+
 void mostrarDat(){
-    ArchivoObras archObras("obras.dat");
+    /*ArchivoObras archObras("obras.dat");
     cout << "                   OBRAS.DAT"<<endl;
     cout<<left<<setw(6)<<"Cod"<<setw(20)<<"Dir"<<setw(6)<<"Prov"<<setw(6)<<"Sup"<<setw(6)<<"EsEj"<<setw(6)<<"Estado"<<endl;
     archObras.listarArchivo();
@@ -286,7 +318,9 @@ void mostrarDat(){
     ArchivoProveedor archProv("Proveedores.dat");
     cout << "                   PROVEEDORES.DAT" << endl;
     cout<<left<<setw(6)<<"Prvd"<<setw(18)<<"Nombre"<<setw(10)<<"Telefono"<<setw(10)<<"Direccion"<<setw(6)<<"Prov"<<setw(4)<<"Estado"<<endl;
-    archProv.listarArchivo();
+    archProv.listarArchivo();*/
+    ArchivoProveedor a("Proveedores.dat");
+    a.listarArchivo();
 }
 
 int main(){
