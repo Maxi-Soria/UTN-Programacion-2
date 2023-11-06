@@ -367,6 +367,7 @@ public:
 
     bool operator==(Pasaje pas){
         return numeroPasajero == pas.getNumeroPasajero();
+
     }
 
 };
