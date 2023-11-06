@@ -225,9 +225,29 @@ int main(){
     setlocale (LC_ALL, "Spanish");
 
 
+    ArchivoAvion archAvion;
+    ArchivoVuelo archVuelo;
+    ArchivoPasajes archPasaje;
+
+    cout << "AVION"<<endl;
+    archAvion.listarArchivo();
+
+    cout << endl <<endl;
+
+    cout << "PASAJES"<<endl;
+    archPasaje.listarArchivo();
+
+    cout << endl <<endl;
+
+    cout << "VUELO"<<endl;
+    archVuelo.listarArchivo();
+
+
+    return 0;
+
     cout << "PUNtO 1" << endl;
     solucionPunto1();
-    cout << endl<< "PUNTO 2" << endl;
+    /*cout << endl<< "PUNTO 2" << endl;
     //solucionPunto2();
     ArchivoAvion obj;
     obj.listarArchivo();
@@ -240,7 +260,7 @@ int main(){
     solucionPunto7();
     solucionPunto10();
 
-
+*/
 
 
     return 0;
@@ -265,7 +285,7 @@ void solucionPunto1(){
         bool compro = false;
         for (int j=0 ; j<cantPasajes ; j++ ){
             regPasaje = archPasaje.leerRegistro(j);
-            if(regPas.getNumeroPasajero() == regPasaje.getNumeroPasajero() && regPasaje.getFechaCompra().getAnio() == 2022){
+            if(regPas == regPasaje && regPasaje.getFechaCompra().getAnio() == 2022){
                 compro = true;
             }
 

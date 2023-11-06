@@ -11,15 +11,13 @@ private:
     float cantToneladas;
 
 public:
-
     void Mostrar() {
         cout << codigoEmpresa <<"   "<< nombre <<"  "<< cantToneladas;
     }
 
-    void setCodigoEmpresa(const char* codigo) { strcpy(codigoEmpresa, codigo); }
+    void setCodigoEmpresa(const char* codigo) { strcpy(codigoEmpresa, codigo);}
     void setNombre(const char* nomb) { strcpy(nombre, nomb); }
     void setCantToneladas(float cant) { cantToneladas = cant; }
-
 };
 
 class ArchivoPuntoA {
@@ -85,15 +83,16 @@ int main(){
     obj.listarArchivo();
     return 0;*/
 
+
     setlocale (LC_ALL, "Spanish");
     cout << "PUNTO A" << endl;
-    //solucionPuntoA();
+    solucionPuntoA();
     cout << endl;
     cout << "PUNTO B" << endl;
     //solucionPuntoB();
     cout << endl;
     cout << "PUNTO C" << endl;
-    //solucionPuntoC();
+    solucionPuntoC();
     cout << endl;
     cout << "PUNTO D" << endl;
     //solucionPuntoD();
@@ -102,20 +101,20 @@ int main(){
     ///VUELVEN A EJECUTAR VA A DIVIDIR KILO / 1000.
     cout << endl;
     cout << "PUNTO E" << endl;
-    solucionPuntoE();
+    //solucionPuntoE();
     cout << endl;
 
     return 0;
 }
 
 void solucionPuntoA(){
-    ArchivoCosecha archCos;
-    Cosecha regCos;
-    int cantCos = archCos.contarRegistros();
-
     ArchivoEmpresa archEmp;
     Empresa regEmp;
     int cantEmp = archEmp.contarRegistros();
+
+    ArchivoCosecha archCos;
+    Cosecha regCos;
+    int cantCos = archCos.contarRegistros();
 
     ArchivoPuntoA archPA;
     PuntoA regPA;
@@ -180,8 +179,9 @@ void solucionPuntoC(){
     Cosecha regCos;
     int cantCos = archCos.contarRegistros();
 
+    ///PuntoA vec[cantEmp];
     PuntoA* vec = nullptr;
-    vec = new PuntoA[cantEmp];
+    vec = new PuntoA[cantEmp]{};
     if(vec == nullptr){return ;}
 
     ArchivoPuntoA archPA;
@@ -198,18 +198,27 @@ void solucionPuntoC(){
                 acumToneladas += regCos.getToneladasCosechadas();
             }
         }
+
         vec[i].setCodigoEmpresa(regEmp.getCodigoEmpresa());
         vec[i].setNombre(regEmp.getNombre());
         vec[i].setCantToneladas(acumToneladas);
-        archPA.escribirRegistro(vec[i]);
+        //archPA.escribirRegistro(vec[i]);
     }
+
+    for (int i=0 ; i<cantEmp ; i++ ){
+        vec[i].Mostrar();
+        cout  << endl;
+
+    }
+
+
     delete []vec;
 
-    archPA.listarArchivo();
+    //archPA.listarArchivo();
 
 }
 
-
+/*
 void solucionPuntoD(){
     ArchivoCosecha archCos;
     Cosecha regCos;
@@ -223,7 +232,7 @@ void solucionPuntoD(){
         archCos.remplazarReg(regCos,i);
     }
 }
-
+*/
 
 void solucionPuntoE(){
     cout << "Operador sobrecargado en la clase Empresa" << endl;

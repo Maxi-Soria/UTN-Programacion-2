@@ -28,7 +28,7 @@ public:
     void Mostrar(){
         cout<<dia<<"/";
         cout<<mes<<"/";
-        cout<<anio<<endl;
+        cout<<anio;
     }
     int getDia(){return dia;}
     int getMes(){return mes;}
@@ -60,11 +60,7 @@ public:
     }
 
     void Mostrar(){
-        cout<<codigoVuelo<<endl;
-        cout<<nombre<<endl;
-        cout<<destino<<endl;
-        cout<<tiempoViaje<<endl;
-        cout<<tipoViaje<<endl;
+        cout<<codigoVuelo<<"    "<<nombre<<"    "<<destino<<"   "<<tiempoViaje<<"   "<<tipoViaje;
     }
 
     const char* getCodigoVuelo(){return codigoVuelo;}
@@ -253,14 +249,8 @@ public:
     }
 
     void Mostrar(){
-        cout<<numeroPasaje<<endl;
-        cout<<numeroPasajero<<endl;
-        cout<<codigoAvion<<endl;
-        cout<<codigoVuelo<<endl;
-        cout<<cantidad<<endl;
-        cout<<importe<<endl;
+        cout<<numeroPasaje<<"   "<<numeroPasajero<<"    "<<codigoAvion<<"   "<<codigoVuelo<<"   "<<cantidad<<"  "<<importe<<"   ";
         fechaCompra.Mostrar();
-        cout<<endl;
     }
     int getNumeroPasaje(){return numeroPasaje;}
     int getNumeroPasajero(){return numeroPasajero;}
@@ -374,6 +364,10 @@ public:
     void setTelefono(const char *n){strcpy(telefono,n);}
     void setDireccion(const char *n){strcpy(direccion,n);}
     void setActivo(bool a){activo=a;}
+
+    bool operator==(Pasaje pas){
+        return numeroPasajero == pas.getNumeroPasajero();
+    }
 
 };
 

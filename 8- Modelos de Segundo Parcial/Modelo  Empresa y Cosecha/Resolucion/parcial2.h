@@ -75,13 +75,13 @@ public:
     void setDireccion(const char* d) { strcpy(direccion, d); }
     void setTipoEmpresa(int t) { tipoEmpresa = t; }
 
-    ///Sobre carga de operador == del punto E
+    /*///Sobre carga de operador == del punto E
     bool operator == (Cosecha reg){
         if(strcmp(codigoEmpresa,reg.getCodigoEmpresa())== 0){
             return true;
         }
         return false
-    }
+    }*/
 };
 
 class ArchivoEmpresa {
@@ -114,6 +114,7 @@ public:
         fclose(p);
         return tam / sizeof(Empresa);
     }
+
 
 };
 
@@ -158,6 +159,12 @@ public:
     void setCodigoCereal(int c) { codigoCereal = c; }
     void setToneladasCosechadas(float t) { toneladasCosechadas = t; }
     void setFecha(Fecha f) { fecha = f; }
+
+    ///Sobrecarga
+    bool operator == (Empresa reg){
+        if(strcmp(codigoEmpresa, reg.getCodigoEmpresa()) == 0) return true;
+        return false;
+    }
 };
 
 class ArchivoCosecha {
@@ -198,6 +205,21 @@ public:
         bool escribio = fwrite(&reg, sizeof reg, 1, p);
         fclose(p);
         return escribio;
+    }
+    bool listarArchivo() {
+        Cosecha reg;
+        FILE* p;
+        p = fopen(nombre, "rb");
+        if (p == NULL) {
+            cout << "No se pudo abrir el archivo." << endl;
+            return false;
+        }
+        while (fread(&reg, sizeof reg, 1, p) == 1) {
+            reg.Mostrar();
+            cout << endl;
+        }
+        fclose(p);
+        return true;
     }
 
 };
