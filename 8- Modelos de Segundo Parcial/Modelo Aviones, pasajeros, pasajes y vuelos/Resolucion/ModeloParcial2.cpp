@@ -57,6 +57,15 @@ public:
         strcpy(nombre, "Punto1.dat");
     }
 
+    bool escribirRegistro(Punto1 reg) {
+        FILE* p;
+        p = fopen(nombre, "ab");
+        if(p == NULL) return false;
+        bool escribio = fwrite(&reg, sizeof reg, 1, p);
+        fclose(p);
+        return escribio;
+    }
+
     Punto1 leerRegistro(int pos) {
         Punto1 reg;
         reg.setNumeroPasajero(-1);
@@ -95,14 +104,17 @@ public:
         return true;
     }
 
-    bool escribirRegistro(Punto1 reg) {
-        FILE* p;
-        p = fopen(nombre, "ab");
-        if(p == NULL) return false;
-        bool escribio = fwrite(&reg, sizeof reg, 1, p);
+    bool modificarRegistro(Punto1 obj, int nroReg) {
+        FILE* p = fopen(nombre, "rb+");
+        if (p == NULL) {
+            return false;
+        }
+        fseek(p, nroReg * sizeof(Punto1), SEEK_SET);
+        bool ok = fwrite(&obj, sizeof(Punto1), 1, p);
         fclose(p);
-        return escribio;
+        return ok;
     }
+
     void vaciar(){
         FILE *p = fopen(nombre, "wb");
         if (p == NULL){return ;}
