@@ -1,0 +1,36 @@
+a) Generar un archivo con la cantidad de tareas para cada uno de los proyectos.
+Cada registro debe tener
+Código de proyecto, nombre y cantidad de tareas
+
+1) Archivos necesarios: tareas y proyectos
+2) Necesito una nueva clase para darle formato al registro, y una clase para generar y manejar el archivo.
+3) Empiezo por proyectos (código y el nombre), y con una función averiguo la cantidad de tareas (en el archivo tareas) que coincidan con el código de proyecto leído.
+Repito por cada proyecto.
+
+
+
+b) Generar un archivo con el tiempo trabajado por cada empleado en el mes de mayo.
+Cada registro debe tener el siguiente formato
+número de empleado,nombre y cantidad de horas
+
+1) Archivos: empleados y tareas
+2) Necesito una nueva clase para darle formato al registro, y una clase para generar y manejar el archivo.
+3) Empiezo por empleados, y luego suma la cantidad de horas de las tareas del mes de mayo correspondientes al empleado que leí.
+3 a)Empiezo por empleados. Con un vector de 60 sumo las horas del mes de mayo de cada empleado (utilizo como índice del vector el número de empleado -1.
+Luego leo cada registro de empleados, y asocio la cantidad con el número de empleado leído.  
+
+
+c) Informar para cada uno de los empleados la cantidad total de tareas realizadas de cada categoría. Informe el nombre del empleado y la cantidad de tareas
+1) Archivos: empleados y tareas.
+2) No necesito una clase nueva.
+3) Puedo usar un vector que inicializo en 0 con cada empleado, o podría usar (60x5) una matriz.
+
+
+d) Para cada origen, informar la cantidad de componentes de cada tipo.
+Archivo/s: componentes
+
+
+e) Dar de baja a todos los componentes de origen europeo
+
+
+f) Listar el archivo del punto a usando asignación dinámica de memoria

@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1681819803 source:c:\users\erica\desktop\programacion 2\guias\tp 1\6. tp 2 clases\proyecto clase fecha\clase fecha\main.cpp
+	<iostream>
+	"Fecha.h"
+
+1681819789 c:\users\erica\desktop\programacion 2\guias\tp 1\6. tp 2 clases\proyecto clase fecha\clase fecha\include\fecha.h
+
+1681819924 source:c:\users\erica\desktop\programacion 2\guias\tp 1\6. tp 2 clases\proyecto clase fecha\clase fecha\src\fecha.cpp
+	<iostream>
+	<cstdlib>
+	"Fecha.h"
+
