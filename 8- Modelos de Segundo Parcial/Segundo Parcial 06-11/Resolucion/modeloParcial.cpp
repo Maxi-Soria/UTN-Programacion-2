@@ -4,8 +4,6 @@
 using namespace std;
 #include "parcial2.h"
 
-
-
 class Ventas2023{
 private:
     int numVenta;
@@ -13,22 +11,25 @@ private:
     char nombre[30];
 public:
 
+    void setNumVenta(int nv){numVenta = nv;}
+    void setCodigoCliente(const char* codCli) { strcpy(codigoCliente, codCli);}
+    void setNombre(const char* nom){strcpy(nombre, nom);}
+
     void Mostrar(){
         cout << "Numero de Venta: " << numVenta << endl;
         cout << "Codigo de cliente: " << codigoCliente << endl;
         cout << "Nombre del cliente: " << nombre << endl;
 
     }
-    void setNumVenta(int nv){numVenta = nv;}
-    void setCodigoCliente(const char* codCli) { strcpy(codigoCliente, codCli);}
-    void setNombre(const char* nom){strcpy(nombre, nom);}
 
     bool operator = (Cliente cli){
         strcpy(codigoCliente, cli.getCodigoCliente());
         strcpy(nombre, cli.getNombre());
         return true;
     }
+
 };
+
 
 class ArchivoVentas2023{
 private:
@@ -79,7 +80,7 @@ void SolucionPunto1(){
     int cantCli = archCli.contarRegistros();
     Cliente regCliente;
 
-    ArchivoVentas2023 arch2023;
+    ArchivoVentas2023 archVentas2023;
     Ventas2023 reg;
 
     for (int i=0 ; i<cantVentas ; i++ ){
@@ -87,33 +88,32 @@ void SolucionPunto1(){
 
         for (int j=0 ; j<cantCli ; j++ ){
             regCliente = archCli.leerRegistro(j);
-
-            if(regVenta.getFechaVenta().getAnio() == 2023 && strcmp(regVenta.getNumeroDeCliente(),regCliente.getCodigoCliente()) == 0  && regVenta.getEstado()){
+            if(regVenta.getFechaVenta().getAnio() == 2023 && strcmp(regVenta.getNumeroDeCliente(),regCliente.getCodigoCliente()) == 0){
                 reg.setNumVenta(regVenta.getNumeroVenta());
                 reg = regCliente;
                 /*
                 reg.setCodigoCliente(regCliente.getCodigoCliente());
                 reg.setNombre(regCliente.getNombre());
                 */
-
-                arch2023.escribirRegistro(reg);
+                archVentas2023.escribirRegistro(reg);
                 reg.Mostrar();
-                cout << endl;
+
             }
 
         }
     }
 
-}
 
+}
 
 
 void SolucionPunto2(){
     ArchivoVentas2023 arch2023;
     int cantReg = arch2023.contarRegistros();
 
-    if(cantReg > 0){
-        Ventas2023 *vec=NULL;
+    if(cantReg > -1){
+
+        Ventas2023 *vec = NULL;
         vec= new Ventas2023[cantReg];
         if (vec==NULL)return;
 
@@ -126,30 +126,27 @@ void SolucionPunto2(){
         }
 
         delete []vec;
+
+
+
+
     }
     else{
-        cout << "No se pudo leer el archivo." << endl;
+        cout << "No se pudo leer" << endl;
     }
 
 }
 
-
-
-
-
-
-
-
-
-int main (){
+int main(){
 
     SolucionPunto1();
-
-    SolucionPunto1();
-
+    SolucionPunto2();
 
 
 return 0;
 }
+
+
+
 
 
