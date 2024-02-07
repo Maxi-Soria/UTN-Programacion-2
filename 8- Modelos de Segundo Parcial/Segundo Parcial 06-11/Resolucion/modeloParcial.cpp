@@ -126,10 +126,6 @@ void SolucionPunto2(){
         }
 
         delete []vec;
-
-
-
-
     }
     else{
         cout << "No se pudo leer" << endl;
